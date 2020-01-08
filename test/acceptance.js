@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { boardKey, board, printBoard, markBoard, clear, checkWin } = require('../app');
 
-describe.only('Acceptance Tests: Tic Tac Toe', () => {
+describe('Acceptance Tests: Tic Tac Toe', () => {
   afterEach(() => {
     clear(board);
   });
@@ -30,7 +30,7 @@ describe.only('Acceptance Tests: Tic Tac Toe', () => {
   });
 
   describe('Player Moves', () => {
-    it('Displays that player can make a move', () => {
+    it('Displays that player can make a move on board', () => {
       markBoard(5, 'X');
       const expected = [
         '   |   |   ',
@@ -41,9 +41,7 @@ describe.only('Acceptance Tests: Tic Tac Toe', () => {
         ].join('\n');    
       expect(printBoard()).to.deep.equal(expected);
     });
-  });
 
-  describe('Game Win', () => { 
     it('Determines if current player wins', () => {
       let player = 'X';
       markBoard(1, 'X');
@@ -52,33 +50,6 @@ describe.only('Acceptance Tests: Tic Tac Toe', () => {
       let playerWin = checkWin(player) === true;
       expect(playerWin).to.equal(true, 'player has drawn a row of three symbols');
     });
-    
-    it('Determines if current player loses', () => {
-      let player = 'X';
-      markBoard(7, 'X');
-      markBoard(8, 'O');
-      markBoard(9, 'X');
-      markBoard(3, 'O');
-      markBoard(1, 'X');
-      expect(checkWin(player)).to.equal(false, 'current player lost');
-    });
-
-    it('Determines if players tie match', () => {
-      let playerX = 'X';
-      let playerO = 'O';
-
-      markBoard(1, 'X');
-      markBoard(4, 'O');
-      markBoard(2, 'X');
-      markBoard(3, 'O');
-      markBoard(7, 'X');
-      markBoard(8, 'O');
-      markBoard(9, 'X');
-      markBoard(5, 'O');
-      markBoard(6, 'X');
-
-      expect(checkWin(playerX)).to.equal(false, 'player has tied game');
-      expect(checkWin(playerO)).to.equal(false, 'player has tied game');
-    });
+  
   }); 
 });
